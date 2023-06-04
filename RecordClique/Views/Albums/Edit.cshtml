@@ -1,0 +1,69 @@
+﻿@model RecordClique.Models.Album
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Album</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="AlbumName" class="control-label"></label>
+                <input asp-for="AlbumName" class="form-control" />
+                <span asp-validation-for="AlbumName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlbumDescription" class="control-label"></label>
+                <input asp-for="AlbumDescription" class="form-control" />
+                <span asp-validation-for="AlbumDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlbumPrice" class="control-label"></label>
+                <input asp-for="AlbumPrice" class="form-control" />
+                <span asp-validation-for="AlbumPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlbumCoverURL" class="control-label"></label>
+                <input asp-for="AlbumCoverURL" class="form-control" />
+                <span asp-validation-for="AlbumCoverURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlbumReleaseDate" class="control-label"></label>
+                <input asp-for="AlbumReleaseDate" class="form-control" />
+                <span asp-validation-for="AlbumReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AlbumGenre" class="control-label"></label>
+                <input asp-for="AlbumGenre" class="form-control" />
+                <span asp-validation-for="AlbumGenre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LabelID" class="control-label"></label>
+                <select asp-for="LabelID" class="form-control" asp-items="ViewBag.LabelID"></select>
+                <span asp-validation-for="LabelID" class="text-danger"></span>
+            </div>          
+            <div class="form-group">
+                <label asp-for="ArtistId" class="control-label"></label>
+                <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.ArtistId"></select>
+                <span asp-validation-for="ArtistId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

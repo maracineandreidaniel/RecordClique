@@ -1,0 +1,43 @@
+﻿@using RecordClique.Data.ViewModels
+@model UserAlbumsVM
+
+<h1>My Albums</h1>
+
+<h2>Favourite Albums</h2>
+<table class="table">
+    <!--... Similar to the album table structure for favourite albums...-->
+    @foreach (var album in Model.FavouriteAlbums)
+    {
+            <tr>
+              <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
+            </tr>
+    }
+</table>
+
+<h2>Wishlist Albums</h2>
+<table class="table">
+    <!--... Similar to the album table structure for wishlist albums...-->
+    @foreach (var album in Model.WishlistAlbums)
+    {
+            <tr>
+                 <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
+            </tr>
+    }
+</table>
+
+<h2>Currently Listening</h2>
+<table class="table">
+    <!--... Similar to the album table structure for listening albums...-->
+    @foreach (var album in Model.ListeningAlbums)
+    {
+            <tr>
+            <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
+            <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
+            <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
+            </tr>
+    }
+</table>

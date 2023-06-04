@@ -1,0 +1,35 @@
+﻿body {
+    background-color: aqua
+}
+
+
+tbody tr td {
+  /*  display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;*/
+}
+
+
+tbody{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px
+}
+
+    tbody tr {
+        margin-bottom: 100px;
+    }
+
+.biggie{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rebeccapurple;
+    height: 200px;
+    column-gap: 100px;
+    row-gap: 40px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+}

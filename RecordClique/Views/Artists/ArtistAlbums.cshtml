@@ -1,0 +1,25 @@
+﻿@model IEnumerable<RecordClique.Models.Album>
+
+<h2>Artist's Albums</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AlbumName)
+            </th>
+            <!-- Other album properties... -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlbumName)
+                </td>
+                <!-- Other album properties... -->
+            </tr>
+        }
+    </tbody>
+</table>

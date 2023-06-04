@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Album>
+
+@{
+    ViewData["Title"] = "My Favourite Albums";
+}
+
+<h2>My Favourite Albums</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.AlbumName)</th>
+            <th>@Html.DisplayNameFor(model => model.AlbumDescription)</th>
+            <th>@Html.DisplayNameFor(model => model.AlbumPrice)</th>
+            <!-- Add more columns as needed... -->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var album in Model)
+        {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
+                    <!-- Display more properties as needed... -->
+                    <td>
+                        <form asp-controller="Account" asp-action="RemoveFromFavourite" method="post">
+                            <input type="hidden" name="albumId" value="@album.Id">
+                            <button type="submit" class="btn btn-danger">Remove from Favourites</button>
+                        </form>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
