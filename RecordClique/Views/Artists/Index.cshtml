@@ -5,47 +5,33 @@
 }
 
 <head>
-    <meta charset="utf-8" />      
-    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Artists_Index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
 </head>
 
-<div class ="row">
-    <div>
-        <table>
-            <thead>
-                <tr class = "text-center">
-                    <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
-                    <th>@Html.DisplayNameFor(model => model.ArtistName)</th>
-                    <th>@Html.DisplayNameFor(model => model.ArtistBio)</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                <tr class=" biggie">
-                    <td>
-                        <img class= "rounded-circle" src = "@item.ProfilePictureURL"  style = "max-width: 150px "/>
-                    </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ArtistName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ArtistBio)
-                </td>
-                <td class="buttons">
-                            <a class=" btn btn-outline-primary  " asp-action="Edit" asp-route-id=" @item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
-                            <a class=" btn btn-outline-info " asp-action="Details" asp-route-id=" @item.Id"> <i class="bi bi-eye"></i>Details</a>
-                            <a class=" btn btn-danger  " asp-action="Delete" asp-route-id=" @item.Id"> <i class="bi bi-trash"></i>Delete</a>
-                             <a class="btn btn-outline-primary" asp-action="ArtistAlbums" asp-route-id="@item.Id">
-                <i class="bi bi-album"></i>View Artist' Albums
-            </a>
-                    </td>
-            </tr>
-                }
-            </tbody>
-        </table> 
-    </div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card artist-card">
+                <img class="card-img-top rounded-circle artist-image" src="@item.ProfilePictureURL" alt="@item.ArtistName" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.ArtistName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.ArtistBio)</p>
+                    <a class="btn btn-outline-primary artist-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
+                    <a class="btn btn-outline-info artist-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
+                    <a class="btn btn-danger artist-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
+                    <a class="btn btn-outline-primary artist-action-button" asp-action="ArtistAlbums" asp-route-id="@item.Id" >
+                        <i class="bi bi-vinyl"></i>
+                        <i class="bi bi-album"></i>View Artist' Albums
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @await Html.PartialAsync("_CreateItem","Artists")

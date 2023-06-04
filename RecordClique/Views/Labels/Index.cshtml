@@ -4,44 +4,30 @@
     ViewData["Title"] = "List of Labels";
 }
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Labels_Index.css" />
+</head>
 
-        <table class="table">
-            <thead>
-                <tr class="text-center">
-                    <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
-                    <th>@Html.DisplayNameFor(model => model.LabelName)</th>
-                    <th>@Html.DisplayNameFor(model => model.LabelBio)</th>                   
-                    <th>Actions</th>                    
-                    </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td class="align-middle">
-                        <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.LabelName" style="max-width: 150px" />
-                    </td>
-                    <td class="align-middle">
-                        @Html.DisplayFor(modelItem => item.LabelName)
-                    </td>
-                    <td class="align-middle">
-                            @Html.DisplayFor(modelItem => item.LabelBio)
-                    </td>                    
-                        <td class="align-middle">
-                            <a class=" btn btn-outline-primary  " asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Delete</a>
-                                <a class=" btn btn-outline-info " asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
-                            <a class=" btn btn-danger  " asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Edit</a>
-                                <a asp-action="LabelAlbums" asp-route-id="@item.Id" class="btn btn-primary">View Label's Albums</a>
-                        </td>                    
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card label-card">
+                <img class="card-img-top rounded-circle label-image" src="@item.ProfilePictureURL" alt="@item.LabelName" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.LabelName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.LabelBio)</p>
+                    <a class="btn btn-outline-primary label-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
+                    <a class="btn btn-outline-info label-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
+                    <a class="btn btn-danger label-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
+                    <a class="btn btn-primary label-action-button" asp-action="LabelAlbums" asp-route-id="@item.Id">
+                        <i class="bi bi-album"></i>View Label's Albums
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @await Html.PartialAsync("_CreateItem","Labels")
-
-
