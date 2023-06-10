@@ -1,42 +1,4 @@
-﻿/*body {
-    background-color: #ebebeb;
-}
-
-.artist-card {
-    margin-top: 20px;
-    background-color: #f8fff0;
-    border-color: #4CAF50;*/ /* Green border color */
-    /*border-radius: 30px;
-    font-family: 'Carter One', cursive;
-}
-
-.artist-image {
-    width: 150px;
-    height: 150px;
-    margin: 10px auto;
-}
-
-.artist-action-button {
-    margin: 5px;
-}
-
-    .artist-action-button i {
-        margin-right: 5px;
-    }*/
-
-/* For Edit and View Albums buttons */
-/*.btn-outline-primary {
-    border-color: #4CAF50;*/ /* Green border color */
-    /*color: #4CAF50;*/ /* Green text color */
-    /*border-radius: 20px;
-}
-
-    .btn-outline-primary:hover {
-        background-color: #4CAF50;*/ /* Green background on hover */
-        /*color: #ffffff;*/ /* White text on hover */
-        
-    /*}*/
-
+﻿
 body {
     background-color: #ebebeb;
 }

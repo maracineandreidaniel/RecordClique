@@ -1,0 +1,25 @@
+﻿/* Delete Label Styles */
+.delete-label-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+    .delete-label-card .card-header {
+        background: #dc3545;
+        border-bottom: none;
+    }
+
+    .delete-label-card .label-picture {
+        max-width: 150px;
+    }
+
+    .delete-label-card .submit-btn {
+        transition: all 0.3s ease;
+    }
+
+        .delete-label-card .submit-btn:hover {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }

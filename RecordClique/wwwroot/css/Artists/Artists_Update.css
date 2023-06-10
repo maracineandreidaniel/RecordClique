@@ -1,0 +1,18 @@
+﻿/* Artist Edit Styles */
+.artist-edit-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+}
+
+    .artist-edit-card .card-header {
+        background: #28a745;
+       
+    }
+
+    .artist-edit-card .artist-picture {
+        max-width: 150px;
+        height: 150px;
+    }
+
+
+   

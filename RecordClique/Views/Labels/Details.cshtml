@@ -1,68 +1,48 @@
 ﻿@model Label
 
 @{
-    ViewData["Title"] = "Details of artist";
+    ViewData["Title"] = "Details of Label";
 }
 
-<div class=" row text">
-    <div class="col-md-8 offset-2">
-        <p>
-            <h1>Details for @Model.LabelName</h1>
-        </p>
-        <div class="row">
-            <div class=" col-md-8 offset-2">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Labels/Labels_Details.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+</head>
 
-
-
-                <div class=" form-group text-center">
-                    <img class="border-info rounded-circle" style="max-width:150px" id="ProfilePicturePreview" />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card details-label-card">
+                <div class="card-header text-center text-white bg-success">
+                    <h1>Details for @Model.LabelName</h1>
                 </div>
-
-                <div class="form-group">
-                    <label asp-for="ProfilePictureURL" class=" control-label"></label>
-                    <input asp-for="ProfilePictureURL" class=" form-control" readonly />
-                    <span asp-validation-for="ProfilePictureURL" class=" text-danger"></span>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group text-center">
+                            <img class="label-picture rounded-circle" id="ProfilePicturePreview" src="@Model.ProfilePictureURL" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProfilePictureURL" class="control-label"></label>
+                            <input asp-for="ProfilePictureURL" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LabelName" class="control-label"></label>
+                            <input asp-for="LabelName" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LabelBio" class="control-label"></label>
+                            <textarea asp-for="LabelBio" class="form-control" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-outline-success float-right edit-btn" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                            <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label asp-for="LabelName" class=" control-label"></label>
-                    <input asp-for="LabelName" class=" form-control" readonly />
-                    <span asp-validation-for="LabelName" class=" text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LabelBio" class=" control-label"></label>
-                    <input asp-for="LabelBio" class=" form-control" readonly />
-                    <span asp-validation-for="LabelBio" class=" text-danger"></span>
-                </div>
-
-                <div class=" form-group">
-                    <a class=" btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                    <a class=" btn btn-outline-secondary" asp-action="Index">Show all</a>
-                </div>
-
-
-
-
-
-
             </div>
         </div>
     </div>
 </div>
-
-
-@section Scripts{
-
-
-
-
-    <script>
-
-        $(document).ready(function ()
-
-                            var output = document.getElementById('ProfilePicturePreview');
-        output.src = $("ProfilePictureURL").val();
-
-        {
-        })
-    </script>
-}

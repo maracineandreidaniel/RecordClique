@@ -6,22 +6,26 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="~/css/Labels_Index.css" />
+    <link rel="stylesheet" href="~/css/Labels/Labels_Index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
 </head>
 
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card label-card">
-                <img class="card-img-top rounded-circle label-image" src="@item.ProfilePictureURL" alt="@item.LabelName" />
+            <div class="card artist-card">
+                <img class="card-img-top rounded-circle artist-image" src="@item.ProfilePictureURL" alt="@item.LabelName" />
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.LabelName)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.LabelBio)</p>
-                    <a class="btn btn-outline-primary label-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
-                    <a class="btn btn-outline-info label-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
-                    <a class="btn btn-danger label-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
-                    <a class="btn btn-primary label-action-button" asp-action="LabelAlbums" asp-route-id="@item.Id">
+                    <a class="btn btn-outline-primary artist-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
+                    <a class="btn btn-outline-info artist-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
+                    <a class="btn btn-danger artist-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
+                    <a class="btn btn-outline-primary artist-action-button" asp-action="LabelAlbums" asp-route-id="@item.Id">
+                        <i class="bi bi-vinyl"></i>
                         <i class="bi bi-album"></i>View Label's Albums
                     </a>
                 </div>

@@ -4,65 +4,53 @@
     ViewData["Title"] = "Details of artist";
 }
 
-<div class=" row text">
-    <div class="col-md-8 offset-2">
-        <p>
-            <h1>Details for @Model.ArtistName</h1>
-        </p>
-        <div class="row">
-            <div class=" col-md-8 offset-2">
-              
-                    
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Artists/Artists_Details.css" />
+</head>
 
-                    <div class=" form-group text-center">
-                        <img class="border-info rounded-circle" style="max-width:150px" id="ProfilePicturePreview" />
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="ProfilePictureURL" class=" control-label"></label>
-                        <input asp-for="ProfilePictureURL" class=" form-control" readonly/>
-                        <span asp-validation-for="ProfilePictureURL" class=" text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card artist-details-card">
+                <div class="card-header text-center text-white bg-success">
+                    <h1>Details for @Model.ArtistName</h1>
+                </div>
+                <div class="card-body">
+                    <div class="form-group text-center">
+                        <img class="artist-picture rounded-circle" id="ProfilePicturePreview" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ArtistName" class=" control-label"></label>
-                        <input asp-for="ArtistName" class=" form-control" readonly/>
-                        <span asp-validation-for="ArtistName" class=" text-danger"></span>
+                        <label asp-for="ProfilePictureURL" class="control-label"></label>
+                        <input asp-for="ProfilePictureURL" class="form-control" id="ProfilePictureURL" readonly />
                     </div>
                     <div class="form-group">
-                        <label asp-for="ArtistBio" class=" control-label"></label>
-                        <input asp-for="ArtistBio" class=" form-control" readonly/>
-                        <span asp-validation-for="ArtistBio" class=" text-danger"></span>
+                        <label asp-for="ArtistName" class="control-label"></label>
+                        <input asp-for="ArtistName" class="form-control" id="ArtistName" readonly />
                     </div>
-
-                    <div class=" form-group">
-                        <a class=" btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                        <a class=" btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    <div class="form-group">
+                        <label asp-for="ArtistBio" class="control-label"></label>
+                        <textarea asp-for="ArtistBio" class="form-control" id="ArtistBio" readonly></textarea>
                     </div>
-
-
-                
-
-
-
+                    <div class="form-group">
+                        <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
 @section Scripts{
-
-
-
-
     <script>
+        $(document).ready(function () {
+            updateImagePreview();
+        });
 
-        $(document).ready(function ()
-
-                    var output = document.getElementById('ProfilePicturePreview');
-        output.src = $("ProfilePictureURL").val();
-
-        {
-        })
+        function updateImagePreview() {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureURL").val();
+        }
     </script>
 }

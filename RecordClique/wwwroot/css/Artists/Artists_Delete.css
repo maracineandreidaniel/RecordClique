@@ -1,0 +1,14 @@
+﻿/* Artist Delete Styles */
+.artist-delete-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+}
+
+    .artist-delete-card .card-header {
+        background: #dc3545;
+    }
+
+    .artist-delete-card .artist-picture {
+        max-width: 150px;
+        height: 150px;
+    }

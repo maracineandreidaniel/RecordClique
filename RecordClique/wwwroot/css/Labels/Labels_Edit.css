@@ -1,0 +1,36 @@
+﻿/* Edit Label Styles */
+.edit-label-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+    .edit-label-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 15px 25px rgba(0,0,0,0.3);
+    }
+
+    .edit-label-card .card-header {
+        background: #28a745;
+        border-bottom: none;
+    }
+
+    .edit-label-card .label-picture {
+        max-width: 150px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .edit-label-card .label-picture:hover {
+            transform: scale(1.1);
+        }
+
+    .edit-label-card .update-btn {
+        transition: all 0.3s ease;
+    }
+
+        .edit-label-card .update-btn:hover {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
