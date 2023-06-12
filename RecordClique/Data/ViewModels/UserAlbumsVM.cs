@@ -1,12 +1,9 @@
 ﻿using RecordClique.Models;
 
-namespace RecordClique.Data.ViewModels
+public class UserAlbumsVM
 {
-    public class UserAlbumsVM
-    {
-        public IEnumerable<Album> FavouriteAlbums { get; set; }
-        public IEnumerable<Album> WishlistAlbums { get; set; }
-        public IEnumerable<Album> ListeningAlbums { get; set; }
-    }
-
+    public string FriendName { get; set; }
+    public IEnumerable<Album> FavouriteAlbums { get; set; }
+    public IEnumerable<Album> WishlistAlbums { get; set; }
+    public IEnumerable<Album> ListeningAlbums { get; set; }
 }

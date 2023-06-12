@@ -156,7 +156,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> RemoveFromFavourite(int albumId)
+        public async Task<IActionResult> RemoveFromFavourites(int albumId)
        
         {
             var user = await _userManager.GetUserAsync(User);
@@ -171,7 +171,7 @@ namespace RecordClique.Controllers
             }
 
             // Redirect to the appropriate view, e.g., details view for the album
-            return RedirectToAction("Index", "Albums");
+            return RedirectToAction("MyAlbums", "Account");
         }
 
 
@@ -233,7 +233,7 @@ namespace RecordClique.Controllers
             }
 
             // Redirect to the appropriate view, e.g., details view for the album
-            return RedirectToAction("Index", "Albums");
+            return RedirectToAction("MyAlbums", "Account");
         }
 
 
@@ -281,7 +281,7 @@ namespace RecordClique.Controllers
             }
 
             // Redirect to the appropriate view, e.g., details view for the album
-            return RedirectToAction("Index", "Albums");
+            return RedirectToAction("MyAlbums", "Account");
         }
 
 
@@ -290,6 +290,9 @@ namespace RecordClique.Controllers
 
         public async Task<IActionResult> FriendsAlbums(string friendId)
         {
+            var friend = await _userManager.FindByIdAsync(friendId);
+            var friendName = friend.FullName; 
+
             var favouriteAlbums = await _context.UserAlbums
                 .Where(x => x.ApplicationUserId == friendId && x.IsFavourite)
                 .Select(x => x.Album)
@@ -307,6 +310,7 @@ namespace RecordClique.Controllers
 
             var viewModel = new UserAlbumsVM
             {
+                FriendName = friendName,
                 FavouriteAlbums = favouriteAlbums,
                 WishlistAlbums = wishlistAlbums,
                 ListeningAlbums = listeningAlbums
@@ -314,6 +318,7 @@ namespace RecordClique.Controllers
 
             return View(viewModel);
         }
+
 
 
         public async Task<IActionResult> MyAlbums()

@@ -1,43 +1,42 @@
 ﻿@using RecordClique.Data.ViewModels
 @model UserAlbumsVM
 
-<h1>My Albums</h1>
+<head>
+    <title>My Albums</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <link rel="stylesheet" href="~/css/Account/MyAlbums.css" />
+</head>
 
-<h2>Favourite Albums</h2>
-<table class="table">
-    <!--... Similar to the album table structure for favourite albums...-->
-    @foreach (var album in Model.FavouriteAlbums)
-    {
-                <tr>
-                  <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
-                        <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
-                        <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
-                </tr>
-    }
-</table>
+<div class="container">
+    <h1>My Albums</h1>
 
-<h2>Wishlist Albums</h2>
-<table class="table">
-    <!--... Similar to the album table structure for wishlist albums...-->
-    @foreach (var album in Model.WishlistAlbums)
+    @foreach (var albumCollection in new[] { new { Name = "Favourite Albums", Albums = Model.FavouriteAlbums, Action = "RemoveFromFavourites" }, new { Name = "Wishlist Albums", Albums = Model.WishlistAlbums, Action = "RemoveFromWishlist" }, new { Name = "Listening Albums", Albums = Model.ListeningAlbums, Action = "RemoveFromListening" } })
     {
-                <tr>
-                     <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
-                        <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
-                        <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
-                </tr>
+        <h2>@albumCollection.Name</h2>
+        <div class="slider">
+            @foreach (var album in albumCollection.Albums)
+            {
+                <div class="card album-card">
+                    <img class="card-img-top album-image" src="@album.AlbumCoverURL" alt="@album.AlbumName" />
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => album.AlbumName)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => album.AlbumDescription)</p>                       
+                        <form asp-controller="Account" asp-action="@albumCollection.Action" method="post">
+                            <input type="hidden" name="albumId" value="@album.Id">
+                            <button onclick="messageListening(' @album.AlbumName ')" class="btn btn-outline-primary btn-listening" type="submit"> <i class="bi bi-x-circle"></i> @albumCollection.Action</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
     }
-</table>
+</div>
 
-<h2>Currently Listening</h2>
-<table class="table">
-    <!--... Similar to the album table structure for listening albums...-->
-    @foreach (var album in Model.ListeningAlbums)
-    {
-                <tr>
-                <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
-                <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
-                <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
-                </tr>
-    }
-</table>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="~/js/Account/MyAlbums.js"></script>
+}

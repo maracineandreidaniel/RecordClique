@@ -1,0 +1,43 @@
+﻿/* Albums Slider Styles */
+
+.slider {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.slick-slide {
+    margin: 0px 20px;
+}
+
+    .slick-slide img {
+        width: 100%;
+    }
+
+.slick-prev:before,
+.slick-next:before {
+    color: black;
+}
+
+.album-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .album-card:hover {
+        transform: scale(1.05);
+    }
+
+    .album-card .album-image {
+        max-width: 300px;
+        // Adjust this to make the images larger
+    }
+
+    .album-card .album-action-button {
+        margin: 5px;
+        align-self: center;
+    }
