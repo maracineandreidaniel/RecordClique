@@ -1,0 +1,108 @@
+﻿body {
+    background-color: #ebebeb;
+}
+
+.album-card {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    border: 2px solid black;
+    background-image: url("~/css/Images/card_background.png");
+    background-repeat: no-repeat;
+    /*background-color: #cccccc;*/
+}
+
+    .album-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    }
+
+.album-image {
+    width: 150px;
+    height: 150px;
+    margin: 10px auto;
+    border-radius: 50%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.album-action-button {
+    margin: 5px;
+}
+
+    .album-action-button i {
+        margin-right: 5px;
+    }
+
+/* For Edit and View Albums buttons */
+.btn-outline-primary {
+    border-color: #4CAF50; /* Green border color */
+    color: #4CAF50; /* Green text color */
+}
+
+    .btn-outline-primary:hover {
+        background-color: #4CAF50; /* Green background on hover */
+        color: #ffffff; /* White text on hover */
+    }
+
+
+/* For Add to Favourite button */
+.btn-favourite {
+    border-color: #ff4081; /* Pink border color */
+    color: #ff4081; /* Pink text color */
+    margin: 5px;
+}
+
+    .btn-favourite:hover {
+        background-color: #ff4081; /* Pink background on hover */
+        color: #ffffff; /* White text on hover */
+    }
+
+/* For Add to Listening button */
+.btn-listening {
+    border-color: #448aff; /* Blue border color */
+    color: #448aff; /* Blue text color */
+    margin: 5px;
+}
+
+    .btn-listening:hover {
+        background-color: #448aff; /* Blue background on hover */
+        color: #ffffff; /* White text on hover */
+    }
+
+/* For Add to Wishlist button */
+.btn-wishlist {
+    border-color: #ff5722; /* Orange border color */
+    color: #ff5722; /* Orange text color */
+    margin: 5px;
+}
+
+    .btn-wishlist:hover {
+        background-color: #ff5722; /* Orange background on hover */
+        color: #ffffff; /* White text on hover */
+    }
+
+
+.album-actions-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.album-action-button {
+    margin-bottom: 10px; /* Add some spacing between buttons */
+}
+

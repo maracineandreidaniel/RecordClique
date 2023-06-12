@@ -1,66 +1,68 @@
 ﻿@model RecordClique.Models.Album
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details of Album";
 }
 
-<h1>Details</h1>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Albums/Albums_Details.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+</head>
 
-<div>
-    <h4>Album</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlbumName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlbumName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlbumDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlbumDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlbumPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlbumPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlbumCoverURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlbumCoverURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlbumReleaseDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlbumReleaseDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AlbumGenre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AlbumGenre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Label)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Label.LabelName)
-        </dd>       
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Artist)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Artist.ArtistBio)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card details-album-card">
+                <div class="card-header text-center text-white bg-success">
+                    <h1>Details for @Model.AlbumName</h1>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group text-center">
+                            <img class="album-picture rounded-circle" id="AlbumCoverPreview" src="@Model.AlbumCoverURL" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumCoverURL" class="control-label"></label>
+                            <input asp-for="AlbumCoverURL" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumName" class="control-label"></label>
+                            <input asp-for="AlbumName" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumDescription" class="control-label"></label>
+                            <textarea asp-for="AlbumDescription" class="form-control" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumPrice" class="control-label"></label>
+                            <input asp-for="AlbumPrice" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumReleaseDate" class="control-label"></label>
+                            <input asp-for="AlbumReleaseDate" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumGenre" class="control-label"></label>
+                            <input asp-for="AlbumGenre" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Label.LabelName" class="control-label"></label>
+                            <input asp-for="Label.LabelName" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Artist.ArtistBio" class="control-label"></label>
+                            <textarea asp-for="Artist.ArtistBio" class="form-control" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-outline-success float-right edit-btn" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                            <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

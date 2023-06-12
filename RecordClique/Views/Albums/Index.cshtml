@@ -1,93 +1,71 @@
 ﻿@model IEnumerable<RecordClique.Models.Album>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List of Albums";
 }
 
-<h1>Index</h1>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Albums/Albums_Index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+</head>
 
-@if (User.Identity.IsAuthenticated && User.IsInRole("User") )
-{
-    <p>
-        <a asp-action="Create">Create NewU</a>
-    </p>
-}
-@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <p>
-        <a asp-action="Create">Create NewA</a>
-    </p>
-}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card album-card">
+                <img class="card-img-top rounded-circle album-image" src="@item.AlbumCoverURL" alt="@item.AlbumName" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.AlbumName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.AlbumDescription)</p>
+                    <div class="album-actions-container">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-outline-primary album-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
+                            <a class="btn btn-danger album-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                        {
+                            <form asp-controller="Account" asp-action="AddToFavourite" method="post">
+                                <input type="hidden" name="albumId" value="@item.Id">
+                                <button onclick="messageFavourites(' @item.AlbumName ')" class="btn btn-outline-primary btn-favourite" type="submit"> <i class="bi bi-star-fill"></i> Add to Favourite</button>
+                            </form>
+                            <form asp-controller="Account" asp-action="AddToListening" method="post">
+                                <input type="hidden" name="albumId" value="@item.Id">
+                                <button onclick="messageListening(' @item.AlbumName ')" class="btn btn-outline-primary btn-listening" type="submit"> <i class="bi bi-headphones"></i> Add to Listening</button>
+                            </form>
+                            <form asp-controller="Account" asp-action="AddToWishlist" method="post">
+                                <input type="hidden" name="albumId" value="@item.Id">
+                                <button onclick="messageWishlist(' @item.AlbumName ')" class="btn btn-outline-primary btn-wishlist" type="submit"> <i class="bi bi-bag-heart-fill"></i> Add to Wishlist</button>
+                            </form>
+                        }
+                        <a class="btn btn-outline-info album-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-@if (User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
-{
-    <p>
-        <a asp-action="Create">Create NewA</a>
-    </p>
+@await Html.PartialAsync("_CreateItem","Albums")
+
+
+@section Scripts{
+  <script>
+    function messageFavourites(name) {        
+        alert(`Album ${name} was added to the favourites.`);
+    }
+
+    function messageWishlist(name) {              
+        alert(`Album ${name} was added to the wishlist.`);
+    }
+
+        function messageListening(name) {
+            alert(`Album ${name} was added to the listening albums.`);
+        }
+</script>
+    
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumCoverURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumGenre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Label)
-            </th>           
-            <th>
-                @Html.DisplayNameFor(model => model.Artist)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumCoverURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlbumGenre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Label.LabelName)
-            </td>           
-            <td>
-                @Html.DisplayFor(modelItem => item.Artist.ArtistBio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

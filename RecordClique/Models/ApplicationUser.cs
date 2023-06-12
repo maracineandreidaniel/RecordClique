@@ -13,6 +13,9 @@ namespace RecordClique.Models
         public string FullName { get; set; }
 
 
+
+
+
         public ICollection<Friendship> FriendshipsInitiated { get; set; }
         public ICollection<Friendship> FriendshipsAccepted { get; set; }
 

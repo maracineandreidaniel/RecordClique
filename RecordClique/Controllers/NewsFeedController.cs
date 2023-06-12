@@ -41,8 +41,11 @@ namespace RecordClique.Controllers
                 .Where(log => friends.Contains(log.UserName))
                 .ToListAsync();
 
+            ViewData["Context"] = _context;  // Add this line to pass the context
+
             return View(logs);
         }
+
 
 
     }

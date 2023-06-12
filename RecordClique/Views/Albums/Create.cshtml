@@ -1,66 +1,91 @@
 ﻿@model RecordClique.Models.Album
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add a new album";
 }
 
-<h1>Create</h1>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Albums/Albums_Create.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+</head>
 
-<h4>Album</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AlbumName" class="control-label"></label>
-                <input asp-for="AlbumName" class="form-control" />
-                <span asp-validation-for="AlbumName" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card create-album-card">
+                <div class="card-header text-center text-white bg-success">
+                    <h1>Add a New Album</h1>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div class="form-group text-center">
+                            <img class="album-cover rounded-circle" id="AlbumCoverPreview" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumCoverURL" class="control-label"></label>
+                            <input asp-for="AlbumCoverURL" class="form-control" id="AlbumCoverURL" />
+                            <span asp-validation-for="AlbumCoverURL" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumName" class="control-label"></label>
+                            <input asp-for="AlbumName" class="form-control" />
+                            <span asp-validation-for="AlbumName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumDescription" class="control-label"></label>
+                            <textarea asp-for="AlbumDescription" class="form-control"></textarea>
+                            <span asp-validation-for="AlbumDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumPrice" class="control-label"></label>
+                            <input asp-for="AlbumPrice" class="form-control" />
+                            <span asp-validation-for="AlbumPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumReleaseDate" class="control-label"></label>
+                            <input asp-for="AlbumReleaseDate" class="form-control" />
+                            <span asp-validation-for="AlbumReleaseDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AlbumGenre" class="control-label"></label>
+                            <input asp-for="AlbumGenre" class="form-control" />
+                            <span asp-validation-for="AlbumGenre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LabelID" class="control-label"></label>
+                            <select asp-for="LabelID" class="form-control" asp-items="ViewBag.LabelID"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ArtistId" class="control-label"></label>
+                            <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.ArtistId"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-outline-success float-right submit-btn" />
+                            <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AlbumDescription" class="control-label"></label>
-                <input asp-for="AlbumDescription" class="form-control" />
-                <span asp-validation-for="AlbumDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AlbumPrice" class="control-label"></label>
-                <input asp-for="AlbumPrice" class="form-control" />
-                <span asp-validation-for="AlbumPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AlbumCoverURL" class="control-label"></label>
-                <input asp-for="AlbumCoverURL" class="form-control" />
-                <span asp-validation-for="AlbumCoverURL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AlbumReleaseDate" class="control-label"></label>
-                <input asp-for="AlbumReleaseDate" class="form-control" />
-                <span asp-validation-for="AlbumReleaseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AlbumGenre" class="control-label"></label>
-                <input asp-for="AlbumGenre" class="form-control" />
-                <span asp-validation-for="AlbumGenre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LabelID" class="control-label"></label>
-                <select asp-for="LabelID" class ="form-control" asp-items="ViewBag.LabelID"></select>
-            </div>           
-            <div class="form-group">
-                <label asp-for="ArtistId" class="control-label"></label>
-                <select asp-for="ArtistId" class ="form-control" asp-items="ViewBag.ArtistId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            updateImagePreview();
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            $("#AlbumCoverURL").on("change", function () {
+                updateImagePreview();
+            })
+        });
+
+        function updateImagePreview() {
+            var output = document.getElementById('AlbumCoverPreview');
+            output.src = $("#AlbumCoverURL").val();
+        }
+    </script>
 }

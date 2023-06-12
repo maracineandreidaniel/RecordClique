@@ -1,43 +1,27 @@
-﻿@*@using RecordClique.Data.Extensions;
-@model IEnumerable<NewsFeedLog>
-
-@{
-    ViewData["Title"] = "News Feed Logs";
-}
-
-<h2>News Feed Logs</h2>
-
-<ul>
-    @foreach (var log in Model)
-    {
-        <li>@log.DisplayAction()</li>
-    }
-</ul>
-*@
-
-@using RecordClique.Data.Extensions;
+﻿@using RecordClique.Data.Extensions;
 @model IEnumerable<RecordClique.Models.NewsFeedLog>
 
-<h1>News Feed</h1>
+@{
+    var context = ViewData["Context"] as RecordClique.Data.AppDbContext;
+}
 
-<table class="table">
-    <thead>
-        <tr class="text-center">
-            <th>User</th>
-            <th>Action</th>
-            <th>Friend</th>
-            <th>Album</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                    <td>@item.DisplayAction()</td>
-                    <td>@Html.DisplayFor(modelItem => item.Friend)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Album)</td>
-                </tr>
-        }
-    </tbody>
-</table>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/NewsFeed/NewsFeed_Index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+</head>
+
+<div class="container">
+   
+
+    @foreach (var item in Model)
+    {
+        <div class="card news-feed-card">           
+            <div class="card-body">
+                <p>@item.DisplayAction(context)</p>
+            </div>
+        </div>
+    }
+</div>

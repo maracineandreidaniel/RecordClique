@@ -51,7 +51,7 @@ namespace RecordClique.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Albums");
+                        return RedirectToAction("Index", "NewsFeed");
                     }
                 }
                 TempData["Error"] = "Wrong credentials. Please, try again!";
@@ -95,7 +95,7 @@ namespace RecordClique.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Albums");
+            return RedirectToAction("Index", "NewsFeed");
         }
 
         public IActionResult AccessDenied(string ReturnUrl)

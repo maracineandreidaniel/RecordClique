@@ -1,0 +1,36 @@
+﻿/* Create Album Styles */
+.create-album-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+    .create-album-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 15px 25px rgba(0,0,0,0.3);
+    }
+
+    .create-album-card .card-header {
+        background: #28a745;
+        border-bottom: none;
+    }
+
+    .create-album-card .album-cover {
+        max-width: 150px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .create-album-card .album-cover:hover {
+            transform: scale(1.1);
+        }
+
+    .create-album-card .submit-btn {
+        transition: all 0.3s ease;
+    }
+
+        .create-album-card .submit-btn:hover {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }

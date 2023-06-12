@@ -1,0 +1,14 @@
+﻿/* Album Delete Styles */
+.album-delete-card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+}
+
+    .album-delete-card .card-header {
+        background: #dc3545;
+    }
+
+    .album-delete-card .album-picture {
+        max-width: 150px;
+        height: 150px;
+    }
