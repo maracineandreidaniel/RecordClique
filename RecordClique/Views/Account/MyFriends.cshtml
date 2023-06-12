@@ -1,35 +1,34 @@
 ﻿@model IEnumerable<RecordClique.Models.ApplicationUser>
 
-<h1>My Friends</h1>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Account/MyFriends.css" />
+</head>
 
-<table class="table">
-    <thead>
-        <tr class="text-center">
-            <th>@Html.DisplayNameFor(model => model.FullName)</th>
-            <th>@Html.DisplayNameFor(model => model.UserName)</th>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
+
+<div class="container">
+    <h1>My Friends</h1>
+
+    <ul class="user-list">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
-                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                <td>
+            <li class="user-item">
+                <div class="user-info">
+                    <h5 class="user-fullname">@Html.DisplayFor(modelItem => item.FullName)</h5>
+                    <p class="user-username">@Html.DisplayFor(modelItem => item.UserName)</p>
+                    <p class="user-email">@Html.DisplayFor(modelItem => item.Email)</p>
+                </div>
+                <div class="user-action">
                     <form asp-controller="Friend" asp-action="RemoveFriend" method="post">
                         <input type="hidden" name="friendId" value="@item.Id">
-                        <button type="submit">Remove Friend</button>
-                    </form>                       
+                        <button type="submit" class="btn-remove">Remove Friend</button>
+                    </form>
                     <form asp-controller="Account" asp-action="FriendsAlbums" method="get">
                         <input type="hidden" name="friendId" value="@item.Id">
-                        <button type="submit">View Albums</button>
+                        <button type="submit" class="btn-view">View Albums</button>
                     </form>
-
-                </td>
-            </tr>
+                </div>
+            </li>
         }
-    </tbody>
-</table>
+    </ul>
+</div>

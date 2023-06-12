@@ -27,6 +27,15 @@ public class FriendController : Controller
             return NotFound("Friend not found");
         }
 
+        var existingFriendship = await _context.Friendships.FirstOrDefaultAsync(f =>
+            (f.InitiatorId == user.Id && f.FriendId == friend.Id));
+
+        if (existingFriendship != null)
+        {
+            TempData["Message"] = "Friendship already exists.";
+            return RedirectToAction("Users", "Account");
+        }
+
         var friendship = new Friendship
         {
             InitiatorId = user.Id,
@@ -37,8 +46,8 @@ public class FriendController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Users", "Account");
-
     }
+
 
     public async Task<IActionResult> Index()
     {

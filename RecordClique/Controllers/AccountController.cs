@@ -30,9 +30,21 @@ namespace RecordClique.Controllers
 
         public async Task<IActionResult> Users()
         {
-            var users = await _context.Users.ToListAsync();
-            return View(users);
+            try
+            {
+                var currentUserId = _userManager.GetUserId(User);
+                var users = await _context.Users.Where(u => u.Id != currentUserId).ToListAsync();
+                return View(users);
+            }
+            catch (Exception ex)
+            {                
+                return RedirectToAction("AlreadyAddedFriend.cshtml", "Errors");
+            }
         }
+
+
+
+
 
 
         public IActionResult Login() => View(new LoginVM());
