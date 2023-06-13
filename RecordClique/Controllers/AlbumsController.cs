@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +49,7 @@ namespace RecordClique.Controllers
         }
 
         // GET: Albums/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistBio");
@@ -73,6 +76,7 @@ namespace RecordClique.Controllers
         }
 
         // GET: Albums/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Albums == null)
@@ -128,6 +132,7 @@ namespace RecordClique.Controllers
         }
 
         // GET: Albums/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Albums == null)
@@ -170,5 +175,20 @@ namespace RecordClique.Controllers
         {
           return _context.Albums.Any(e => e.Id == id);
         }
+
+
+        public async Task<IActionResult> Filter(string albumName)
+        {
+            IQueryable<Album> appDbContext = _context.Albums.Include(a => a.Artist).Include(a => a.Label);
+
+            if (!String.IsNullOrEmpty(albumName))
+            {
+                appDbContext = appDbContext.Where(a => a.AlbumName.Contains(albumName));
+            }
+
+            return View("Index", await appDbContext.ToListAsync());
+        }
+
+
     }
 }

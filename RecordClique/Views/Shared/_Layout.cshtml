@@ -26,19 +26,30 @@
                             <a class=" nav-link text-dark" asp-controller="Albums" asp-action="Index"> <i class=" badge-info bi-vinyl"></i> </a>
                        </li>
 
-                        <li class="navbar-nav flex-grow-2 dropdown">
-                                    <a class="nav-link dropdown-toggle"  id="aaa" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bi bi-gear"></i> Management
-                                    </a>
 
-                                    <ul class="dropdown-menu" aria-labelledby="aaa">
-                                <li><a class="dropdown-item" asp-controller="Artists" asp-action="Index"><i class="bi bi-person-square"></i> Artists</a></li>
-                                <li><a class="dropdown-item" asp-controller="Labels" asp-action="Index"><i class="bi bi-building"></i> Labels</a></li>      
-                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Users"><i class="bi bi-person"></i> Users</a></li>
-                            </ul>
-                                </li>
+                       @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="navbar-nav flex-grow-2 dropdown">
+                                <a class="nav-link dropdown-toggle"  id="aaa" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i> Management
+                                </a>
 
-                        
+                                <ul class="dropdown-menu" aria-labelledby="aaa">
+                                    <li><a class="dropdown-item" asp-controller="Artists" asp-action="Index"><i class="bi bi-person-square"></i> Artists</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Labels" asp-action="Index"><i class="bi bi-building"></i> Labels</a></li>      
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Users"><i class="bi bi-person"></i> Users</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                        {
+                            <a asp-controller="Artists" asp-action="Index" class="nav-link" type="button"> Artists </a>
+                            <a asp-controller="Labels" asp-action="Index" class="nav-link" type="button">  Labels </a>
+                            <a asp-controller="Account" asp-action="Users" class="nav-link" type="button">  Users </a>          
+                            
+                        }
+
 
                     </ul>                   
 

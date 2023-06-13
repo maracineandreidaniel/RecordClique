@@ -48,7 +48,7 @@ namespace RecordClique.Controllers
         }
 
         // GET: Artists/Create
-      
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -71,6 +71,7 @@ namespace RecordClique.Controllers
         }
 
         // GET: Artists/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Artists == null)
@@ -122,6 +123,7 @@ namespace RecordClique.Controllers
         }
 
         // GET: Artists/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Artists == null)

@@ -35,10 +35,14 @@
                     <p class="user-email">@Html.DisplayFor(modelItem => item.Email)</p>
                 </div>
                 <div class="user-action">
+
+             @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                 {
                     <form asp-controller="Friend" asp-action="AddFriend" method="post">
                         <input type="hidden" name="friendId" value="@item.Id">
                         <button onclick="messageAddedFriend(' @item.FullName ')" type="submit" class="btn-friend">Add Friend</button>
                     </form>
+                 }
                 </div>
             </li>
         }

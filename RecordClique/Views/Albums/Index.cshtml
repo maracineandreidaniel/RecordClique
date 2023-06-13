@@ -12,6 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
 </head>
 
+<p>
+    <form asp-controller="Albums" asp-action="Filter" method="get">
+        <input type="text" name="albumName" value="@ViewData["CurrentFilter"]" style="padding: 10px; width: 200px; border-radius: 5px; border: 1px solid #ccc;" />
+        <input type="submit" value="Search Album" style="background-color: green; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;" />
+    </form>
+</p>
+
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -50,8 +58,10 @@
     }
 </div>
 
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+   {
 @await Html.PartialAsync("_CreateItem","Albums")
-
+   }
 
 @section Scripts{
   <script>

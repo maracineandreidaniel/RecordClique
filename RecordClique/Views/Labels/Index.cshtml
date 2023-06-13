@@ -21,9 +21,12 @@
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.LabelName)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.LabelBio)</p>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
                     <a class="btn btn-outline-primary artist-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
-                    <a class="btn btn-outline-info artist-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
                     <a class="btn btn-danger artist-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
+                        }
+                    <a class="btn btn-outline-info artist-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
                     <a class="btn btn-outline-primary artist-action-button" asp-action="LabelAlbums" asp-route-id="@item.Id">
                         <i class="bi bi-vinyl"></i>
                         <i class="bi bi-album"></i>View Label's Albums
@@ -34,4 +37,8 @@
     }
 </div>
 
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+   {
 @await Html.PartialAsync("_CreateItem","Labels")
+   }

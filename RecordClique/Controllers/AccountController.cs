@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecordClique.Controllers
 {
@@ -115,7 +116,7 @@ namespace RecordClique.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MyFriends()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -128,6 +129,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddToFavourite(int albumId)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -156,6 +158,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> RemoveFromFavourites(int albumId)
        
         {
@@ -174,7 +177,7 @@ namespace RecordClique.Controllers
             return RedirectToAction("MyAlbums", "Account");
         }
 
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MyFavourites()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -190,6 +193,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddToWishlist(int albumId)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -218,6 +222,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> RemoveFromWishlist(int albumId)
 
         {
@@ -238,6 +243,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddToListening(int albumId)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -266,6 +272,7 @@ namespace RecordClique.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> RemoveFromListening(int albumId)
 
         {
@@ -320,7 +327,7 @@ namespace RecordClique.Controllers
         }
 
 
-
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MyAlbums()
         {
             var user = await _userManager.GetUserAsync(User);

@@ -1,25 +1,70 @@
 ﻿@model IEnumerable<RecordClique.Models.Album>
 
-<h2>Label's Albums</h2>
+@{
+    ViewData["Title"] = "Label's Albums";
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AlbumName)
-            </th>
-            <!-- Other album properties... -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AlbumName)
-                </td>
-                <!-- Other album properties... -->
-            </tr>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Labels/Labels_LabelAlbums.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+</head>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card album-card">
+                <img class="card-img-top rounded-circle album-image" src="@item.AlbumCoverURL" alt="@item.AlbumName" />
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.AlbumName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.AlbumDescription)</p>
+                    <div class="album-actions-container">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-outline-primary album-action-button" asp-action="Edit" asp-route-id="@item.Id"> <i class="bi bi-pencil-square"></i>Edit</a>
+                            <a class="btn btn-danger album-action-button" asp-action="Delete" asp-route-id="@item.Id"> <i class="bi bi-trash"></i>Delete</a>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                        {
+                            <form asp-controller="Account" asp-action="AddToFavourite" method="post">
+                                <input type="hidden" name="albumId" value="@item.Id">
+                                <button onclick="messageFavourites(' @item.AlbumName ')" class="btn btn-outline-primary btn-favourite" type="submit"> <i class="bi bi-star-fill"></i> Add to Favourite</button>
+                            </form>
+                            <form asp-controller="Account" asp-action="AddToListening" method="post">
+                                <input type="hidden" name="albumId" value="@item.Id">
+                                <button onclick="messageListening(' @item.AlbumName ')" class="btn btn-outline-primary btn-listening" type="submit"> <i class="bi bi-headphones"></i> Add to Listening</button>
+                            </form>
+                            <form asp-controller="Account" asp-action="AddToWishlist" method="post">
+                                <input type="hidden" name="albumId" value="@item.Id">
+                                <button onclick="messageWishlist(' @item.AlbumName ')" class="btn btn-outline-primary btn-wishlist" type="submit"> <i class="bi bi-bag-heart-fill"></i> Add to Wishlist</button>
+                            </form>
+                        }
+                        <a class="btn btn-outline-info album-action-button" asp-action="Details" asp-route-id="@item.Id"> <i class="bi bi-eye"></i>Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        function messageFavourites(name) {
+            alert(`Album ${name} was added to the favourites.`);
         }
-    </tbody>
-</table>
+
+        function messageWishlist(name) {
+            alert(`Album ${name} was added to the wishlist.`);
+        }
+
+        function messageListening(name) {
+            alert(`Album ${name} was added to the listening albums.`);
+        }
+    </script>
+
+}

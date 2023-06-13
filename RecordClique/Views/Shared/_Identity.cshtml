@@ -33,14 +33,16 @@
                 <i class="bi bi-person-badge"></i> Hello, @UserManager.GetUserName(User)
             </button>
             <div class="dropdown-menu" aria-labelledby="profile-btn">
+
+                 @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+               {
                 <a class="dropdown-item" asp-controller="Account" asp-action="MyAlbums">
                     <i class="bi bi-list"></i> My Profile
                 </a>               
                 <a class="dropdown-item" asp-controller="Account" asp-action="MyFriends">
                         <i class="bi bi-people"></i> My Friends
-                </a>
-                 
-                
+                </a>   
+               }
             </div>
         </div>
 
