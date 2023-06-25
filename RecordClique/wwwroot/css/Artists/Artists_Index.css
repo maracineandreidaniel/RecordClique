@@ -44,13 +44,13 @@ body {
         margin-right: 5px;
     }
 
-/* For Edit and View Albums buttons */
+
 .btn-outline-primary {
-    border-color: #4CAF50; /* Green border color */
-    color: #4CAF50; /* Green text color */
+    border-color: #4CAF50; 
+    color: #4CAF50; 
 }
 
     .btn-outline-primary:hover {
-        background-color: #4CAF50; /* Green background on hover */
-        color: #ffffff; /* White text on hover */
+        background-color: #4CAF50; 
+        color: #ffffff; 
     }

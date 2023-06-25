@@ -13,7 +13,6 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
             <div class="card artist-delete-card">
-                <!-- You may want to change this to 'album-delete-card' and adjust your css accordingly -->
                 <div class="card-header text-center text-white bg-danger">
                     <h1>Delete Confirmation for @Model.AlbumName</h1>
                 </div>
@@ -37,8 +36,6 @@
                             <label asp-for="AlbumDescription" class="control-label"></label>
                             <textarea asp-for="AlbumDescription" class="form-control" id="AlbumDescription" readonly></textarea>
                         </div>
-
-                        <!-- Repeat this pattern for other properties as needed -->
 
                         <input type="hidden" asp-for="Id" />
                         <div class="form-group">

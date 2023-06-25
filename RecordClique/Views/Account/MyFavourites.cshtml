@@ -12,7 +12,6 @@
             <th>@Html.DisplayNameFor(model => model.AlbumName)</th>
             <th>@Html.DisplayNameFor(model => model.AlbumDescription)</th>
             <th>@Html.DisplayNameFor(model => model.AlbumPrice)</th>
-            <!-- Add more columns as needed... -->
             <th></th>
         </tr>
     </thead>
@@ -23,7 +22,6 @@
                     <td>@Html.DisplayFor(modelItem => album.AlbumName)</td>
                     <td>@Html.DisplayFor(modelItem => album.AlbumDescription)</td>
                     <td>@Html.DisplayFor(modelItem => album.AlbumPrice)</td>
-                    <!-- Display more properties as needed... -->
                     <td>
                         <form asp-controller="Account" asp-action="RemoveFromFavourite" method="post">
                             <input type="hidden" name="albumId" value="@album.Id">

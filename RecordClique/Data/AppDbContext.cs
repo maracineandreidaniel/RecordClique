@@ -23,13 +23,13 @@ namespace RecordClique.Data
                 .HasOne(f => f.Initiator)
                 .WithMany(u => u.FriendshipsInitiated)
                 .HasForeignKey(f => f.InitiatorId)
-                .OnDelete(DeleteBehavior.Restrict);  // prevent cascade delete
+                .OnDelete(DeleteBehavior.Restrict);  
 
             modelBuilder.Entity<Friendship>()
                 .HasOne(f => f.Friend)
                 .WithMany(u => u.FriendshipsAccepted)
                 .HasForeignKey(f => f.FriendId)
-                .OnDelete(DeleteBehavior.Restrict);  // prevent cascade delete
+                .OnDelete(DeleteBehavior.Restrict);  
 
             modelBuilder.Entity<UserAlbum>()
             .HasKey(ua => new { ua.ApplicationUserId, ua.AlbumId });

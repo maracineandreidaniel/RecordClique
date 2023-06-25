@@ -1,6 +1,5 @@
 ﻿using RecordClique.Data;
 using RecordClique.Data;
-//using RecordClique.Data.Static;
 using RecordClique.Data.ViewModels;
 using RecordClique.Models;
 using Microsoft.AspNetCore.Identity;
@@ -97,8 +96,7 @@ namespace RecordClique.Controllers
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
-          //  if (newUserResponse.Succeeded)
-            //    await _userManager.AddToRoleAsync(newUser, "Admin");
+  
 
             return View("RegisterCompleted");
         }

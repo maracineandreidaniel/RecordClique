@@ -60,22 +60,6 @@ public class FriendController : Controller
     }
 
 
-    //[HttpPost]
-    //public async Task<IActionResult> RemoveFriend(string friendId)
-    //{
-    //    var user = await _userManager.GetUserAsync(User);
-
-    //    var friendship = _context.Friendships.FirstOrDefault(f =>
-    //        (f.InitiatorId == user.Id && f.FriendId == friendId) ||
-    //        (f.FriendId == user.Id && f.InitiatorId == friendId));
-
-    //    if (friendship != null)
-    //    {
-    //        _context.Friendships.Remove(friendship);
-    //        await _context.SaveChangesAsync();
-    //    }
-    //    return RedirectToAction("MyFriends", "Account");
-    //}
 
     [HttpPost]
     public async Task<IActionResult> RemoveFriend(string friendId)

@@ -49,7 +49,6 @@ namespace RecordClique.Controllers
         }
 
         // POST: Comments/Create
-        // POST: Comments/Create
         [HttpPost]
         public async Task<IActionResult> Create(int AlbumId, string Text)
         {

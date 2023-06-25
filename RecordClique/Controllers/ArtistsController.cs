@@ -55,8 +55,6 @@ namespace RecordClique.Controllers
         }
 
         // POST: Artists/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProfilePictureURL,ArtistName,ArtistBio")] Artist artist)
@@ -88,8 +86,6 @@ namespace RecordClique.Controllers
         }
 
         // POST: Artists/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePictureURL,ArtistName,ArtistBio")] Artist artist)

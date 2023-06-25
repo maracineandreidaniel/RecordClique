@@ -12,7 +12,6 @@
     border: 2px solid black;
     background-image: url("~/css/Images/card_background.png");
     background-repeat: no-repeat;
-    /*background-color: #cccccc;*/
 }
 
     .album-card:hover {
