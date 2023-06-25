@@ -52,14 +52,12 @@ namespace RecordClique.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistBio");
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistName");
             ViewData["LabelID"] = new SelectList(_context.Labels, "Id", "LabelName");          
             return View();
         }
 
         // POST: Albums/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AlbumName,AlbumDescription,AlbumPrice,AlbumCoverURL,AlbumReleaseDate,AlbumGenre,LabelID,ArtistId")] Album album)
@@ -70,7 +68,7 @@ namespace RecordClique.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistBio", album.ArtistId);
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistName", album.ArtistId);
             ViewData["LabelID"] = new SelectList(_context.Labels, "Id", "LabelName", album.LabelID);            
             return View(album);
         }
@@ -89,14 +87,13 @@ namespace RecordClique.Controllers
             {
                 return NotFound();
             }
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistBio", album.ArtistId);
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistName", album.ArtistId);
             ViewData["LabelID"] = new SelectList(_context.Labels, "Id", "LabelName", album.LabelID);          
             return View(album);
         }
 
         // POST: Albums/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,AlbumName,AlbumDescription,AlbumPrice,AlbumCoverURL,AlbumReleaseDate,AlbumGenre,LabelID,ArtistId")] Album album)
@@ -126,7 +123,7 @@ namespace RecordClique.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistBio", album.ArtistId);
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "ArtistName", album.ArtistId);
             ViewData["LabelID"] = new SelectList(_context.Labels, "Id", "LabelName", album.LabelID);
             return View(album);
         }
@@ -187,6 +184,17 @@ namespace RecordClique.Controllers
             }
 
             return View("Index", await appDbContext.ToListAsync());
+        }
+
+
+        public async Task<IActionResult> AlbumComments(int albumId)
+        {
+            var comments = await _context.Comments
+                .Include(c => c.User)
+                .Where(c => c.AlbumId == albumId)
+                .ToListAsync();
+
+            return View(comments);
         }
 
 

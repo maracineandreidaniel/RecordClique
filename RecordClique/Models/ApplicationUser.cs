@@ -21,6 +21,9 @@ namespace RecordClique.Models
 
         public ICollection<UserAlbum> UserAlbums { get; set; }
 
+        public ICollection<Comment> Comments { get; set; }
+
+
 
 
 

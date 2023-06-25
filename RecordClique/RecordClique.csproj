@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Account\Index1.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
@@ -26,7 +22,6 @@
 
   <ItemGroup>
     <None Include="Views\Account\AccessDenied.cshtml" />
-    <None Include="Views\Account\Index1.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\Register.cshtml" />
     <None Include="Views\Account\RegisterCompleted.cshtml" />

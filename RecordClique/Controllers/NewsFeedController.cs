@@ -19,32 +19,26 @@ namespace RecordClique.Controllers
         }
 
 
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    var logs = _context.NewsFeedLogs.ToList();
-        //    return View(logs);
-        //}
-
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
             var friends = await _context.Friendships
-                .Where(f => f.InitiatorId == userId || f.FriendId == userId)
+                .Where(f => f.InitiatorId == userId)
                 .Select(f => f.InitiatorId == userId ? f.FriendId : f.InitiatorId)
                 .ToListAsync();
 
-            // Add current user's id to the list.
             friends.Add(userId);
 
             var logs = await _context.NewsFeedLogs
                 .Where(log => friends.Contains(log.UserName))
+                .OrderByDescending(log => log.Id) 
                 .ToListAsync();
 
-            ViewData["Context"] = _context;  // Add this line to pass the context
+            ViewData["Context"] = _context;
 
             return View(logs);
         }
+
 
 
 

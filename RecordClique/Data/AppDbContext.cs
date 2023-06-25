@@ -65,6 +65,9 @@ namespace RecordClique.Data
 
         public DbSet<NewsFeedLog> NewsFeedLogs { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
+
 
 
 

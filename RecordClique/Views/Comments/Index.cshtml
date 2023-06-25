@@ -1,0 +1,27 @@
+﻿@model IEnumerable<RecordClique.Models.Comment>
+
+@{
+    ViewData["Title"] = "List of all comments";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Comments/Comments_Index.css" />
+</head>
+
+<div class="container">
+    <h4>List of all comments</h4>
+
+    <ul class="comment-list">
+        @foreach (var item in Model)
+        {
+            <li class="comment-item">
+                <div class="comment-info">
+                    <h5 class="comment-text">@Html.DisplayFor(modelItem => item.Text)</h5>
+                    <p class="comment-user">@Html.DisplayFor(modelItem => item.UserId)</p>
+                    <p class="comment-album">@Html.DisplayFor(modelItem => item.AlbumId)</p>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

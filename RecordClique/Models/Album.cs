@@ -1,5 +1,4 @@
 ﻿using RecordClique.Data.Base;
-using RecordClique.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -41,6 +40,9 @@ namespace RecordClique.Models
 
 
         public ICollection<UserAlbum> UserAlbums { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+
     }
 
 }

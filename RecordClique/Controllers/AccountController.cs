@@ -1,6 +1,5 @@
 ﻿using RecordClique.Data;
 using RecordClique.Data;
-using RecordClique.Data.Static;
 //using RecordClique.Data.Static;
 using RecordClique.Data.ViewModels;
 using RecordClique.Models;
@@ -133,49 +132,36 @@ namespace RecordClique.Controllers
         public async Task<IActionResult> AddToFavourite(int albumId)
         {
             var user = await _userManager.GetUserAsync(User);
-            var userAlbum = _context.UserAlbums.FirstOrDefault(ua =>
+            var userAlbum = await _context.UserAlbums.FirstOrDefaultAsync(ua =>
                 ua.ApplicationUserId == user.Id && ua.AlbumId == albumId);
 
             if (userAlbum != null)
             {
-                userAlbum.IsFavourite = true;
+                var sql = "UPDATE UserAlbums SET IsFavourite = 1 WHERE ApplicationUserId = @p0 AND AlbumId = @p1";
+                await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             }
             else
             {
-                userAlbum = new UserAlbum
-                {
-                    ApplicationUserId = user.Id,
-                    AlbumId = albumId,
-                    IsFavourite = true
-                };
-                _context.UserAlbums.Add(userAlbum);
+                var sql = "INSERT INTO UserAlbums (ApplicationUserId, AlbumId, IsFavourite,IsOnWishlist,IsListening) VALUES (@p0, @p1, 1, 0, 0)";
+                await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             }
 
-            await _context.SaveChangesAsync();
-            // Redirect to the appropriate view, e.g., details view for the album
             return RedirectToAction("Index", "Albums");
         }
+
+
 
 
         [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> RemoveFromFavourites(int albumId)
-       
         {
             var user = await _userManager.GetUserAsync(User);
-            var userAlbum = _context.UserAlbums.FirstOrDefault(ua =>
-                ua.ApplicationUserId == user.Id && ua.AlbumId == albumId);
-              
-
-            if (userAlbum != null)
-            {
-                userAlbum.IsFavourite = false;
-                await _context.SaveChangesAsync();
-            }
-
-            // Redirect to the appropriate view, e.g., details view for the album
+            var sql = "UPDATE UserAlbums SET IsFavourite = 0 WHERE ApplicationUserId = @p0 AND AlbumId = @p1";
+            await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             return RedirectToAction("MyAlbums", "Account");
         }
+
 
         [Authorize(Roles = "User")]
         public async Task<IActionResult> MyFavourites()
@@ -197,26 +183,12 @@ namespace RecordClique.Controllers
         public async Task<IActionResult> AddToWishlist(int albumId)
         {
             var user = await _userManager.GetUserAsync(User);
-            var userAlbum = _context.UserAlbums.FirstOrDefault(ua =>
-                ua.ApplicationUserId == user.Id && ua.AlbumId == albumId);
-
-            if (userAlbum != null)
-            {
-                userAlbum.IsOnWishlist = true;
-            }
-            else
-            {
-                userAlbum = new UserAlbum
-                {
-                    ApplicationUserId = user.Id,
-                    AlbumId = albumId,
-                    IsOnWishlist = true
-                };
-                _context.UserAlbums.Add(userAlbum);
-            }
-
-            await _context.SaveChangesAsync();
-            // Redirect to the appropriate view, e.g., details view for the album
+            var sql = @"
+    IF EXISTS (SELECT 1 FROM UserAlbums WHERE ApplicationUserId = @p0 AND AlbumId = @p1)
+        UPDATE UserAlbums SET IsOnWishlist = 1 WHERE ApplicationUserId = @p0 AND AlbumId = @p1
+    ELSE
+        INSERT INTO UserAlbums (ApplicationUserId, AlbumId, IsOnWishlist,IsListening, isFavourite) VALUES (@p0, @p1, 1,0, 0)";
+            await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             return RedirectToAction("Index", "Albums");
         }
 
@@ -224,70 +196,36 @@ namespace RecordClique.Controllers
         [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> RemoveFromWishlist(int albumId)
-
         {
             var user = await _userManager.GetUserAsync(User);
-            var userAlbum = _context.UserAlbums.FirstOrDefault(ua =>
-                ua.ApplicationUserId == user.Id && ua.AlbumId == albumId);
-
-
-            if (userAlbum != null)
-            {
-                userAlbum.IsOnWishlist = false;
-                await _context.SaveChangesAsync();
-            }
-
-            // Redirect to the appropriate view, e.g., details view for the album
+            var sql = "UPDATE UserAlbums SET IsOnWishlist = 0 WHERE ApplicationUserId = @p0 AND AlbumId = @p1";
+            await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             return RedirectToAction("MyAlbums", "Account");
         }
-
 
         [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> AddToListening(int albumId)
         {
             var user = await _userManager.GetUserAsync(User);
-            var userAlbum = _context.UserAlbums.FirstOrDefault(ua =>
-                ua.ApplicationUserId == user.Id && ua.AlbumId == albumId);
-
-            if (userAlbum != null)
-            {
-                userAlbum.IsListening = true;
-            }
-            else
-            {
-                userAlbum = new UserAlbum
-                {
-                    ApplicationUserId = user.Id,
-                    AlbumId = albumId,
-                    IsListening = true
-                };
-                _context.UserAlbums.Add(userAlbum);
-            }
-
-            await _context.SaveChangesAsync();
-            // Redirect to the appropriate view, e.g., details view for the album
+            var sql = @"
+    IF EXISTS (SELECT 1 FROM UserAlbums WHERE ApplicationUserId = @p0 AND AlbumId = @p1)
+        UPDATE UserAlbums SET IsListening = 1 WHERE ApplicationUserId = @p0 AND AlbumId = @p1
+    ELSE
+        INSERT INTO UserAlbums (ApplicationUserId, AlbumId, IsListening, isFavourite, IsOnWishlist) VALUES (@p0, @p1, 1, 0, 0)";
+            await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             return RedirectToAction("Index", "Albums");
         }
+
 
 
         [HttpPost]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> RemoveFromListening(int albumId)
-
         {
             var user = await _userManager.GetUserAsync(User);
-            var userAlbum = _context.UserAlbums.FirstOrDefault(ua =>
-                ua.ApplicationUserId == user.Id && ua.AlbumId == albumId);
-
-
-            if (userAlbum != null)
-            {
-                userAlbum.IsListening = false;
-                await _context.SaveChangesAsync();
-            }
-
-            // Redirect to the appropriate view, e.g., details view for the album
+            var sql = "UPDATE UserAlbums SET IsListening = 0 WHERE ApplicationUserId = @p0 AND AlbumId = @p1";
+            await _context.Database.ExecuteSqlRawAsync(sql, user.Id, albumId);
             return RedirectToAction("MyAlbums", "Account");
         }
 

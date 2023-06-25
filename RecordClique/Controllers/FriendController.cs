@@ -60,6 +60,23 @@ public class FriendController : Controller
     }
 
 
+    //[HttpPost]
+    //public async Task<IActionResult> RemoveFriend(string friendId)
+    //{
+    //    var user = await _userManager.GetUserAsync(User);
+
+    //    var friendship = _context.Friendships.FirstOrDefault(f =>
+    //        (f.InitiatorId == user.Id && f.FriendId == friendId) ||
+    //        (f.FriendId == user.Id && f.InitiatorId == friendId));
+
+    //    if (friendship != null)
+    //    {
+    //        _context.Friendships.Remove(friendship);
+    //        await _context.SaveChangesAsync();
+    //    }
+    //    return RedirectToAction("MyFriends", "Account");
+    //}
+
     [HttpPost]
     public async Task<IActionResult> RemoveFriend(string friendId)
     {
@@ -71,11 +88,36 @@ public class FriendController : Controller
 
         if (friendship != null)
         {
-            _context.Friendships.Remove(friendship);
-            await _context.SaveChangesAsync();
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = @"
+                DELETE FROM dbo.Friendships 
+                WHERE (InitiatorId = @initiatorId AND FriendId = @friendId)
+                OR (FriendId = @initiatorId AND InitiatorId = @friendId)
+            ";
+
+                var initiatorIdParam = command.CreateParameter();
+                initiatorIdParam.ParameterName = "@initiatorId";
+                initiatorIdParam.Value = user.Id;
+                command.Parameters.Add(initiatorIdParam);
+
+                var friendIdParam = command.CreateParameter();
+                friendIdParam.ParameterName = "@friendId";
+                friendIdParam.Value = friendId;
+                command.Parameters.Add(friendIdParam);
+
+                _context.Database.OpenConnection();
+
+                var result = command.ExecuteNonQuery();
+
+                _context.Database.CloseConnection();
+            }
         }
+
         return RedirectToAction("MyFriends", "Account");
     }
+
+
 
     public async Task<IActionResult> MyFriends()
     {

@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8">
             <div class="card edit-album-card">
-                <div class="card-header text-center">
+                <div class="card-header text-center"style="background-color: #28a745; color:white;">
                     <h1>Edit Album</h1>
                 </div>
                 <div class="card-body">
@@ -31,7 +31,7 @@
                             <span asp-validation-for="AlbumDescription" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="AlbumPrice" class="control-label"></label>
+                            <span>Price</span>
                             <input asp-for="AlbumPrice" class="form-control" />
                             <span asp-validation-for="AlbumPrice" class="text-danger"></span>
                         </div>
@@ -41,27 +41,27 @@
                             <span asp-validation-for="AlbumCoverURL" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="AlbumReleaseDate" class="control-label"></label>
+                            <span>Release date</span>
                             <input asp-for="AlbumReleaseDate" class="form-control" />
                             <span asp-validation-for="AlbumReleaseDate" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="AlbumGenre" class="control-label"></label>
+                            <span>Genre</span>
                             <input asp-for="AlbumGenre" class="form-control" />
                             <span asp-validation-for="AlbumGenre" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="LabelID" class="control-label"></label>
+                            <span>Label</span>
                             <select asp-for="LabelID" class="form-control" asp-items="ViewBag.LabelID"></select>
                             <span asp-validation-for="LabelID" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="ArtistId" class="control-label"></label>
+                            <span>Artist</span>
                             <select asp-for="ArtistId" class="form-control" asp-items="ViewBag.ArtistId"></select>
                             <span asp-validation-for="ArtistId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary submit-btn" />
+                            <input style="background-color: #28a745;" type="submit" value="Save" class="btn btn-primary submit-btn" />
                         </div>
                     </form>
                 </div>
@@ -70,9 +70,7 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{

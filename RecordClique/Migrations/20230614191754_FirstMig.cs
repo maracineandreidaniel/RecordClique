@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RecordClique.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class FirstMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -260,6 +260,32 @@ namespace RecordClique.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    AlbumId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Albums_AlbumId",
+                        column: x => x.AlbumId,
+                        principalTable: "Albums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserAlbums",
                 columns: table => new
                 {
@@ -336,6 +362,16 @@ namespace RecordClique.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_AlbumId",
+                table: "Comments",
+                column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Friendships_FriendId",
                 table: "Friendships",
                 column: "FriendId");
@@ -363,6 +399,9 @@ namespace RecordClique.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Friendships");

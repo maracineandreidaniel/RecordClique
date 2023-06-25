@@ -12,8 +12,8 @@ using RecordClique.Data;
 namespace RecordClique.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230530165654_first")]
-    partial class first
+    [Migration("20230614191754_FirstMig")]
+    partial class FirstMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,6 +293,34 @@ namespace RecordClique.Migrations
                     b.ToTable("Artists");
                 });
 
+            modelBuilder.Entity("RecordClique.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("RecordClique.Models.Friendship", b =>
                 {
                     b.Property<string>("InitiatorId")
@@ -451,6 +479,23 @@ namespace RecordClique.Migrations
                     b.Navigation("Label");
                 });
 
+            modelBuilder.Entity("RecordClique.Models.Comment", b =>
+                {
+                    b.HasOne("RecordClique.Models.Album", "Album")
+                        .WithMany("Comments")
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RecordClique.Models.ApplicationUser", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Album");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RecordClique.Models.Friendship", b =>
                 {
                     b.HasOne("RecordClique.Models.ApplicationUser", "Friend")
@@ -491,11 +536,15 @@ namespace RecordClique.Migrations
 
             modelBuilder.Entity("RecordClique.Models.Album", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("UserAlbums");
                 });
 
             modelBuilder.Entity("RecordClique.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("FriendshipsAccepted");
 
                     b.Navigation("FriendshipsInitiated");

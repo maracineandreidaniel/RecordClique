@@ -12,7 +12,8 @@
     }
 
     .edit-album-card .card-header {
-        background: #007bff;
+        background-color: #28a745;
+        color: white;
         border-bottom: none;
     }
 
@@ -27,10 +28,11 @@
 
     .edit-album-card .update-btn {
         transition: all 0.3s ease;
+        color: white;        
     }
 
         .edit-album-card .update-btn:hover {
             background: #007bff;
             border-color: #007bff;
-            color: white;
+            
         }

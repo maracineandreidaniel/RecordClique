@@ -35,11 +35,7 @@
                         <div class="form-group">
                             <label asp-for="AlbumDescription" class="control-label"></label>
                             <textarea asp-for="AlbumDescription" class="form-control" readonly></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="AlbumPrice" class="control-label"></label>
-                            <input asp-for="AlbumPrice" class="form-control" readonly />
-                        </div>
+                        </div>                    
                         <div class="form-group">
                             <label asp-for="AlbumReleaseDate" class="control-label"></label>
                             <input asp-for="AlbumReleaseDate" class="form-control" readonly />
@@ -52,9 +48,13 @@
                             <label asp-for="Label.LabelName" class="control-label"></label>
                             <input asp-for="Label.LabelName" class="form-control" readonly />
                         </div>
+                        <div class="form-group">                    
+                            <span>Artist name</span>
+                            <textarea asp-for="Artist.ArtistName" class="form-control" readonly></textarea>
+                        </div>
                         <div class="form-group">
-                            <label asp-for="Artist.ArtistBio" class="control-label"></label>
-                            <textarea asp-for="Artist.ArtistBio" class="form-control" readonly></textarea>
+                            <span>Label name</span>
+                            <textarea asp-for="Label.LabelName" class="form-control" readonly></textarea>
                         </div>
                         <div class="form-group">
                             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -68,4 +68,23 @@
             </div>
         </div>
     </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form method="post" asp-controller="Comments" asp-action="Create" style="display: inline-block;">
+            <input type="hidden" asp-for="Id" name="AlbumId" />
+            <div class="form-group">
+                <label for="Text">Add a comment:</label>
+                <textarea class="form-control" id="Text" name="Text" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn" style="background-color: #28a745; color: white;">Submit Comment</button>
+        </form>
+        <a class="btn ml-2" style="background-color: #28a745; color: white; display: inline-block;" asp-controller="Albums" asp-action="AlbumComments" asp-route-albumId="@Model.Id">View Album Comments</a>
+
+
+    }
+
+
+
+
 </div>

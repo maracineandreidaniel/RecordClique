@@ -1,5 +1,4 @@
 ﻿using RecordClique.Data.Base;
-using RecordClique.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,8 +31,6 @@ namespace RecordClique.Models
         [Required(ErrorMessage = "Release Date is required!")]
         public DateTime AlbumReleaseDate { get; set; }       
 
-        [Display(Name = "Genre")]        
-        public AlbumGenre AlbumGenre { get; set; }
 
         [Display(Name = "Select artist/artists")]
         [Required(ErrorMessage = "Actors are required!")]
