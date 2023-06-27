@@ -45,52 +45,52 @@
         margin-right: 5px;
     }
 
-/* For Edit and View Albums buttons */
+
 .btn-outline-primary {
-    border-color: #4CAF50; /* Green border color */
-    color: #4CAF50; /* Green text color */
+    border-color: #4CAF50; 
+    color: #4CAF50; 
 }
 
     .btn-outline-primary:hover {
-        background-color: #4CAF50; /* Green background on hover */
-        color: #ffffff; /* White text on hover */
+        background-color: #4CAF50; 
+        color: #ffffff; 
     }
 
 
-/* For Add to Favourite button */
+
 .btn-favourite {
-    border-color: #ff4081; /* Pink border color */
-    color: #ff4081; /* Pink text color */
+    border-color: #ff4081; 
+    color: #ff4081; 
     margin: 5px;
 }
 
     .btn-favourite:hover {
-        background-color: #ff4081; /* Pink background on hover */
-        color: #ffffff; /* White text on hover */
+        background-color: #ff4081; 
+        color: #ffffff; 
     }
 
-/* For Add to Listening button */
+
 .btn-listening {
-    border-color: #448aff; /* Blue border color */
-    color: #448aff; /* Blue text color */
+    border-color: #448aff; 
+    color: #448aff; 
     margin: 5px;
 }
 
     .btn-listening:hover {
-        background-color: #448aff; /* Blue background on hover */
-        color: #ffffff; /* White text on hover */
+        background-color: #448aff; 
+        color: #ffffff; 
     }
 
-/* For Add to Wishlist button */
+
 .btn-wishlist {
-    border-color: #ff5722; /* Orange border color */
-    color: #ff5722; /* Orange text color */
+    border-color: #ff5722; 
+    color: #ff5722; 
     margin: 5px;
 }
 
     .btn-wishlist:hover {
-        background-color: #ff5722; /* Orange background on hover */
-        color: #ffffff; /* White text on hover */
+        background-color: #ff5722; 
+        color: #ffffff; 
     }
 
 
@@ -102,7 +102,7 @@
 }
 
 .album-action-button {
-    margin-bottom: 10px; /* Add some spacing between buttons */
+    margin-bottom: 10px; 
 }
 
 
